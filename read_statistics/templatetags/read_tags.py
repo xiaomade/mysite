@@ -12,3 +12,4 @@ def get_read_num(obj):
         return readnum.read_num
     except exceptions.ObjectDoesNotExist:
         return 0
+

@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.contrib.contenttypes.fields import GenericRelation
 from ckeditor_uploader.fields import RichTextUploadingField
-from read_statistics.models import ReadNumExpandMethod,ReadDetail
+from read_statistics.models import ReadDetail
 
 # Create your models here.
 class BlogType(models.Model):
@@ -12,7 +12,7 @@ class BlogType(models.Model):
     def __str__(self):
         return self.type_name
 
-class Blog(models.Model,ReadNumExpandMethod):
+class Blog(models.Model):
     title=models.CharField(max_length=50)
     blog_type=models.ForeignKey(BlogType, on_delete=models.CASCADE)
     content=RichTextUploadingField()
