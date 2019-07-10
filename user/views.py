@@ -52,10 +52,13 @@ def register(request):
             email=reg_form.cleaned_data['email']
             password=reg_form.cleaned_data['password']
             #创建用户
-            user=User.objects.create_user(username,email,password)
-            #登录用户
-            user = User.authenticated(username=username, password=password)
-            auth.login(request,user)
+            user = User.objects.create_user(username, email, password)
+            user.save()
+            # 清除session
+            del request.session['register_code']
+            # 登录用户
+            user = auth.authenticate(username=username, password=password)
+            auth.login(request, user)
             return redirect(request.GET.get('from',reverse('home')))
     else:
         reg_form=RegForm()
